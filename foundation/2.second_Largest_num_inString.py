@@ -21,17 +21,12 @@
 # s consists of only lowercase English letters and digits.
 
 def finder(s):
-    temp = list(s)
-    contain_num = []
-    repeat = False
-    [contain_num.append(x) for x in temp if x.isnumeric()]
-    for i in range(0,len(contain_num)):
-        for x in range(1,len(contain_num)):
-            if contain_num[i] != contain_num[x]:
-                contain_num.remove(max(contain_num))
-                return int(max(contain_num))
-            else:
-                return -1
+    temp = set(s)  # store in set so get rid off duplicates
+    contain_num = set()
+    [contain_num.add(x) for x in temp if x.isnumeric()] # now add filter to check if is this number then store in contain_num set
+    if len(contain_num)>1: 
+        contain_num.remove(max(contain_num)) # need second laegest so remove the 1st one
+        return int(max(contain_num))
     else:
         return -1
 
@@ -40,4 +35,4 @@ def finder(s):
 print(finder('dfa12321afd')) # 2
 print(finder('abc1111')) # -1
 print(finder('abc')) # -1
-print(finder('ck077')) # -1
+print(finder('ck077')) # 0
